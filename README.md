@@ -10,7 +10,10 @@ kind create cluster --config=cluster.yaml
 Deploy the ingress controller on the cluster and wait for the deployment to be completed. This manifest was copied from https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml.
 ```sh
 kubectl apply -f ingress-nginx.yaml
-kubectl wait --namespace ingress-nginx   --for=condition=ready pod   --selector=app.kubernetes.io/component=controller   --timeout=90s
+kubectl wait --namespace ingress-nginx \
+--for=condition=ready pod \
+--selector=app.kubernetes.io/component=controller \
+--timeout=90s
 ```
 
 
