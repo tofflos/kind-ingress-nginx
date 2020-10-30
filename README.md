@@ -2,10 +2,10 @@
 
 
 Create a cluster using the provided configuration file. For official documentation see https://kind.sigs.k8s.io/docs/user/ingress.
-
 ```sh
-kind create cluster --config=config.yaml
+kind create cluster --config=cluster.yaml
 ```
+
 
 Deploy the ingress controller on the cluster and wait for the deployment to be completed. This manifest was copied from https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml.
 ```sh
@@ -13,13 +13,15 @@ kubectl apply -f ingress-nginx.yaml
 kubectl wait --namespace ingress-nginx   --for=condition=ready pod   --selector=app.kubernetes.io/component=controller   --timeout=90s
 ```
 
+
 Deply an application the uses the ingress controller. This manifest was copied from https://kind.sigs.k8s.io/docs/user/ingress/#using-ingress and modified from apiVersion networking.k8s.io/v1beta1 to apiVersion networking.k8s.io/v1.
 ```sh
 kubectl apply -f ingress-usage.yaml
 ```
 
-Test the ingress
-```
+
+Test the ingress:
+```sh
 http localhost/foo
 HTTP/1.1 200 OK
 Connection: keep-alive
